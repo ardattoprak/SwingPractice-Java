@@ -39,6 +39,7 @@ public class Demo extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         btnRemoveSelected = new javax.swing.JButton();
+        lblMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,8 @@ public class Demo extends javax.swing.JFrame {
             }
         });
 
+        lblMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +99,10 @@ public class Demo extends javax.swing.JFrame {
                                 .addComponent(btnRemove))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,7 +120,9 @@ public class Demo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRemoveSelected))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -123,16 +131,27 @@ public class Demo extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         model.addElement(txtName.getText());
+        lblMessage.setText("Eleman eklendi : " + txtName.getText());
+        txtName.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
         model.removeElement(txtName.getText());
+        lblMessage.setText("Eleman silindi : " + txtName.getText());
+        txtName.setText("");
         
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnRemoveSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveSelectedActionPerformed
         // TODO add your handling code here:
+         
+        int index = lstStudents.getSelectedIndex();  // -1
+        if(index!=-1) {
+        model.removeElementAt(index);} 
+        else {
+            lblMessage.setText("Seçili bir eleman yok");
+        }
     }//GEN-LAST:event_btnRemoveSelectedActionPerformed
 
     /**
@@ -175,6 +194,7 @@ public class Demo extends javax.swing.JFrame {
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnRemoveSelected;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblName;
     private javax.swing.JList<String> lstStudents;
     private javax.swing.JTextField txtName;
